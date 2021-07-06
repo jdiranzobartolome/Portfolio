@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Icons from www.fontawesome.com -->
+    <script
+      src="https://kit.fontawesome.com/b3d4545144.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="css/main.css" />
+    <title>My Awards</title>
+  </head>
+  <body>
+    <!-- element that will only be used to overlaying the background--> 
+    <div class="overlay"></div>
+    <header>
+      <div class="menu-btn">
+        <div class="btn-line"></div>
+        <div class="btn-line"></div>
+        <div class="btn-line"></div>
+      </div>
+
+      <nav class="menu">
+        <div class="menu-branding">
+          <div class="menu-branding-overlay"></div>
+          <div class="portrait"></div>
+        </div>
+        <ul class="menu-nav">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="about.html" class="nav-link">
+              About Me
+            </a>
+          </li>
+          <li class="nav-item current">
+            <a href="awards.html" class="nav-link">
+              Certificates & Awards
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="work.html" class="nav-link">
+              Projects
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="contact.html" class="nav-link">
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="awards-page">
+      <!-- Original name without different colour dancing accent 
+      <h1 class="lg-heading name">
+        Jorge David <br />
+        <span class="text-secondary">Iranzo Bartolomé</span>
+      </h1> -->
+      <h1 class="lg-heading name">
+        My 
+        <span class="text-secondary">
+          Awards 
+        </span>
+        <div>
+      </h1>
+      <h2 class="sm-heading">
+        Check out some of the the certificates and awards I have been given!
+      </h2>
+
+      <div class="awards-info">
+
+        <div class="certificates">
+          <span class="prev"><</span>
+          <img src="img/icons/arrow-left.png" alt="Prev" id="prev">
+          <div id="slider">
+
+            <div class="slide active">
+              <div class="slide-copy">
+                <h2>Bachelor Certificate</h2>
+              </div>
+              <img src="img/certificates/bachelor_certificate.jpg">
+            </div>
+          
+            <div class="slide">
+              <div class="slide-copy">
+                <h2>Master Degree Certificate</h2>
+              </div>
+              <img src="img/certificates/master_degree.jpg">
+            </div>
+
+            <div class="slide">
+              <div class="slide-copy">
+                <h2>TOEFL iBT (English proficiency exam) Score</h2>
+              </div>
+              <img src="img/certificates/TOEFL.jpg">
+            </div>
+          
+            <div class="slide">
+              <div class="slide-copy">
+                <h2>Topik Exam (Korean proficiency exam) Score</h2>
+              </div>
+              <img src="img/certificates/topik_score.jpg">
+            </div>
+          
+            <div class="slide">
+              <div class="slide-copy">
+                <h2>Libelium Enterprise Recommendation Letter</h2>
+              </div>
+              <img src="img/certificates/libelium.jpg">
+            </div>
+
+            <div class="slide">
+              <div class="slide-copy">
+                <h2>Korean Immigration and Integration Program Certificate </h2>
+              </div>
+              <img src="img/certificates/KIIP_transcript.jpg">
+            </div>
+
+          </div>
+          <img src="img/icons/arrow-right.png" alt="Next" id="next">  
+          <span class="next">></span>
+        </div>
+
+          <div class="awards">
+            <span class="prev"><</span>
+            <img src="img/icons/arrow-left.png" alt="Prev" id="prev">
+            
+             <div id="slider">
+               <div class="slide active">
+                <div class="slide-copy">
+                  <h2>SKTelecom Nugu Contest Award</h2>
+                </div>
+                <img src="img/awards/nugu.jpg">
+               </div>
+            
+               <div class="slide">
+                <div class="slide-copy">
+                  <h2>2018 Seoul IOT Hackaton Award</h2>
+                  </div>
+                    <img src="img/awards/2018_seoul_IOT_hackaton.jpg">
+               </div>
+
+               <div class="slide">
+                <div class="slide-copy">
+                  <h2>2020 Seoul Hackaton Award</h2>
+                  </div>
+                    <img src="img/awards/2020_seoul_hackaton.jpg">
+               </div>
+            
+               <div class="slide">
+                <div class="slide-copy">
+                  <h2>Art Hackaton Award</h2>
+                </div>
+                <img src="img/awards/hackaton_art.jpg">
+               </div>
+            
+               <div class="slide">
+                <div class="slide-copy">
+                  <h2>KGSP Scholarship Award</h2>
+                </div>
+                <img src="img/awards/KGSP.jpg">
+               </div>
+            
+               <div class="slide">
+                 <div class="slide-copy">
+                   <h2>Aslla Symposium Best Poster Award</h2>
+                 </div>
+                 <img src="img/awards/poster_award.jpg">
+               </div>
+            </div>    
+             <img src="img/icons/arrow-right.png" alt="Next" id="next">     
+             <span class="next">></span>   
+      </div>
+    </main>
+
+    <footer id="main-footer">
+      Copyright &copy; 2020 
+    </footer>
+
+    <!-- Good practice to add the javascript right beore the end of the body for make it it load last-->
+    <script src="js/main.js"></script>
+    <script src="js/slides.js"></script>
+  </body>
+</html>
