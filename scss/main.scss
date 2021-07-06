@@ -1,0 +1,386 @@
+//For compiling sass into css (and be able to just upload css to the server)
+//node-sass is used. You just run "node-sass -w scss/ -o dist/css/ --recur"
+//and save the scss files and then it compiles it into a css folder.
+//However, in windows 10 and VCS there is an error.
+// about the error: https://github.com/sass/node-sass/issues/1894
+//solution: change node_modules/node-sass/lib/render.js
+//with this reder.js: https://github.com/marcosbozzani/node-sass/blob/bug-vscode-watch/lib/render.js
+
+@import "config";
+@import "menu";
+@import "awards_page";
+@import "frame";
+//este se importa abajo (y asi dice traversy que siempre hacen override, pero no estoy tan seguro)
+//@import "mobile";
+// class that is used to make the elements within it never be separated in two lines
+.no-wrap {
+  white-space: nowrap;
+}
+
+html {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  @include background;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: $primary-color;
+  //we use the function created in _config for body text depending on background lightness.
+  color: set-text-color($primary-color);
+  margin: 0;
+  font-family: "Segoe UI", "Segoe UI", Tahoma, Geneva, Verdana,
+    sans-serif;
+  line-height: 1.5;
+}
+
+// Headings
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 400;
+  //by putting the &, we dont do lg-heading classes inside the headers but lg-header classes that are headers.
+  &.lg-heading {
+    //font size of 6rems, six times the default font-size (usually is 16px)
+    //em are the same but instead of relative to the hmtl default size, relative to the parent font-size.
+    font-size: 6rem;
+    line-height: 6rem;
+    padding-bottom: 1rem;
+  }
+
+  &.sm-heading {
+    margin-bottom: 2rem;
+    //A little bit of padding for adding a lighter background with sass lighten function.
+    padding: 0.2rem 1rem;
+    //we wrap the ligthen function (so the color) on rgba function to make it a little trasparent so the background image can be seen
+    background: rgba(lighten($primary-color, 2), 0.5);
+  }
+}
+
+a {
+  color: set-text-color($primary-color);
+  text-decoration: none;
+}
+
+header {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+}
+
+.text-secondary {
+  color: $secondary-color;
+}
+
+main {
+  padding: 4rem;
+  //height: 100%;
+  // This is needed so the footer will always get stuck to the bottom, even if the rest of the content is actually
+  // quite short and reach only half of the viewport. This will make the parent of that content (the main) reach the bottom,
+  // giving 60px for the footer.
+  min-height: calc(100vh - 60px);
+
+  .icons {
+    margin-top: 1rem;
+
+    a {
+      padding: 0.5rem;
+
+      &:hover {
+        // The color of the object contained (the icons) will change when hovering
+        color: $secondary-color;
+        //we add a transition of "all" that means all the properties defined here wil ltransition when hovering (instead of changing inmmediately)
+        //transition: all 0.5s ease-out;
+        // but we will define a mixing called "easeOut()" at the beginning of the document to be able to use it in other places aswell
+        @include easeOut();
+      }
+    }
+  }
+
+  // any main with the id of home will be affected by this
+  &#home {
+    overflow: hidden;
+    width: 100%;
+    h1 {
+      margin-top: 15vh;
+    }
+
+    .surname {
+      display: inline;
+    }
+  }
+}
+
+.letter-container {
+  //display: inline-block;
+  position: relative;
+  padding: 0;
+  margin-top: 0;
+  margin-left: -1.6rem;
+}
+
+//it seems the display block are not needed and if I do the wrap-up class does not apply to them
+//the white-space: no-wrap only works with inline (inline-block) elements.
+.accentless-e {
+  display: inline-block;
+}
+
+.accent {
+  display: inline-block;
+  position: absolute;
+  color: $e-accent-color;
+  top: -3.1rem;
+  left: 4.1rem;
+  transform: skew(-0.06turn, 40deg);
+  height: 0px;
+  padding: 0;
+  margin: 0;
+}
+
+/*  Bouncing Animation */
+
+@keyframes dance {
+  from {
+    transform: rotate(-3deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes beating {
+  0% {
+    font-size: 6rem * 0.9;
+  }
+
+  50% {
+    font-size: 6rem * 1;
+  }
+
+  100% {
+    font-size: 6rem * 0.9;
+  }
+}
+
+.beating {
+  animation: beating 1.5s infinite;
+}
+
+////////// about.html specific////////////////////////
+//Grid from Bio
+
+html#about {
+  #home {
+    padding-top: 15px;
+    padding-bottom: 25px;
+    height: auto;
+    h1 {
+      font-size: 5rem;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    h2 {
+      font-size: 2rem;
+      font-style: italic;
+      margin-top: 0;
+      padding-top: 0;
+      margin-bottom: 20px;
+    }
+    .surname {
+      display: inline;
+    }
+  }
+
+  #about {
+    a {
+      color: $secondary-color;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #eece1ac5;
+      transition: color ease-out;
+    }
+  }
+}
+
+.about-info {
+  display: grid;
+  grid-gap: 20px;
+  //grid-template-areas is used to define the grid areas as a visual representation
+  //CAREFUL: There is no comma between the rows.
+  grid-template-areas:
+    "bioimage bio bio"
+    "job1 job2 job3";
+  grid-template-columns: repeat(3, 1fr);
+
+  .bio-image {
+    grid-area: bioimage;
+    margin: auto;
+    //In the biography I like the image better without circle
+    //border-radius: 40%;
+    border: $secondary-color 3px solid;
+  }
+
+  //Now we define the name of the grid areas and the other css
+  .bio {
+    grid-area: bio;
+    font-size: 1rem;
+  }
+
+  .job-1 {
+    grid-area: job1;
+  }
+
+  .job-2 {
+    grid-area: job2;
+  }
+
+  .job-3 {
+    grid-area: job3;
+  }
+
+  .job {
+    background: lighten($primary-color, 5);
+    padding: 1.2rem;
+    border-bottom: $secondary-color 5px solid;
+  }
+
+  .job-1,
+  .job-2,
+  .job-3 {
+    h3 {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      color: $secondary-color;
+      text-align: left;
+    }
+
+    h4 {
+      margin-top: 0px;
+      padding-top: 0.5rem;
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+      text-align: left;
+    }
+
+    h5 {
+      margin-top: 0px;
+      padding-top: 0px;
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+      text-align: left;
+    }
+
+    ul {
+      margin-top: 0px;
+      margin-bottom: 0.5rem;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      text-align: left;
+    }
+
+    li {
+      font-size: 0.8rem;
+      text-align: left;
+
+      li {
+        font-size: 0.72rem;
+        list-style-type: square;
+        text-align: left;
+      }
+    }
+  }
+}
+
+#work {
+  //Work Page
+  .projects {
+    display: grid;
+    grid-gap: 0.7rem;
+    grid-template-columns: repeat(3, 1fr);
+
+    img {
+      width: 100%;
+      height: 60%;
+      border: 3px #fff solid;
+    }
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  // Button Styles
+  .btn {
+    display: block;
+    padding: 0.5rem 1rem;
+    border: 0;
+    margin-bottom: 0.3rem;
+    &:hover {
+      background: $secondary-color;
+      color: set-text-color($secondary-color);
+    }
+  }
+
+  .btn-dark {
+    @extend .btn;
+    background: darken($primary-color, 50);
+    color: #fff;
+  }
+
+  .btn-light {
+    @extend .btn;
+    background: lighten($primary-color, 50);
+    color: #333;
+  }
+}
+
+#main-footer {
+  text-align: center;
+  padding: 1rem;
+  background: darken($primary-color, 10);
+  color: set-text-color($primary-color);
+  height: 60px;
+}
+
+// contact.html specific
+
+.boxes {
+  display: flex;
+  // So if they don't fit they make new lines.
+  // Its use is interesting here because only by doing that,
+  // there is no need of doing the contact page more responsive.
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 1rem;
+
+  div {
+    font-size: 1.5rem;
+    border: 3px #fff solid;
+    padding: 1.5rem 2.5rem;
+    margin-bottom: 3rem;
+    @include easeOut;
+
+    &:hover {
+      padding: 0.5rem 1.5rem;
+      background: $secondary-color;
+      color: set-text-color($secondary-color);
+      span {
+        color: set-text-color($secondary-color);
+      }
+    }
+  }
+}
+
+//Media Queries import
+@import "mobile";

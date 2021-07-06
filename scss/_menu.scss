@@ -1,0 +1,177 @@
+// Menu Button
+.menu-btn {
+  position: absolute;
+  z-index: 3;
+  right: 35px;
+  top: 35px;
+  cursor: pointer;
+  @include easeOut;
+
+  // Each of the custom three lines from the button
+  .btn-line {
+    width: 28px;
+    height: 3px;
+    margin: 0 0 5px 0;
+    background: set-text-color($primary-color);
+    @include easeOut;
+  }
+
+  // Menu lines rotating and turning into an X style button
+  &.close {
+    // First we rotate the lines 180 degrees
+    transform: rotate(180deg);
+
+    .btn-line {
+      // Line 1- Rotate
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      // Line 2 - Hide
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      // Line 3 - Rotate
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+      }
+    }
+  }
+}
+
+// Menu Overlay
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  // for creating a see-through effect
+  //opacity: 0.9;
+  //by default we want it to be hidden till the user clicks the menu button
+  visibility: hidden;
+  z-index: 2;
+
+  //
+  &.show {
+    visibility: visible;
+  }
+
+  //this uses menu and adds the -branding ==> for menu-branding
+  &-branding,
+  &-nav {
+    //Making the items of each meny be in column and centered both in x and y axis
+    //VITAL: best way of centering things within a div
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    //Giving half a screen to each one of the menus
+    float: left;
+    width: 50%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  &-nav {
+    margin: 0;
+    padding: 0;
+    background: darken($primary-color, 4);
+    list-style: none;
+    opacity: 0.9;
+    // Moving the nav menu all to the top and when the
+    // show class is added in JS, it will move back to the original
+    // position at the speed defined by the mixin easeOut
+    transform: translate3d(0, -100%, 0);
+    @include easeOut;
+
+    &.show {
+      // Slide in from top
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .nav-item {
+    //We move off-screen the items to the right
+    transform: translate3d(600px, 0, 0);
+    @include easeOut;
+
+    &.show {
+      // Slide in from right
+      transform: translate3d(0, 0, 0);
+    }
+
+    .nav-link {
+      display: inline-block;
+      position: relative;
+      font-size: 25px;
+      text-transform: uppercase;
+      padding: 1rem 0;
+      font-weight: 600;
+      color: set-text-color($primary-color);
+      text-decoration: none;
+      @include easeOut;
+
+      &:hover {
+        color: $secondary-color;
+      }
+    }
+
+    //the > selector indicates (when this is class current modify the element children a)
+    &.current > a {
+      color: rgba($secondary-color, 0.8);
+    }
+  }
+
+  &-branding {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    transform: translate3d(0, 100%, 0);
+    @include easeOut;
+
+    &.show {
+      // Slide in from bottom
+      transform: translate3d(0, 0, 0);
+    }
+
+    .portrait {
+      width: 230px;
+      height: 230px;
+      background: url("../img/portrait_gray_small.jpg");
+      background-position: 20px -5px;
+      border-radius: 50%;
+      border: solid 3px $secondary-color;
+      z-index: 1;
+    }
+
+    //children driv created for the menu-branding in order to make the image with opacity 1
+    // but the menu background with opacity 0.9. Originally, all the menu was set to opacity 0.9
+    // but then the image, as children of the whole menu, inherits the opacity (there is no way of cancelling opacities)
+    // I was going to use :after but :after is only CSS (not DOM) so it cannot be selected with JS.
+    &-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: $primary-color;
+      opacity: 0.9;
+      // Moving the nav menu all to the bottom and when the
+      // show class is added in JS, it will move back to the original
+      // position at the speed defined by the mixin easeOut
+      transform: translate3d(0, 100%, 0);
+      @include easeOut;
+
+      &.show {
+        // Slide in from bottom
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+}
+
+// Delay each nav item slide by 0.1s
+@for $x from 1 through 4 {
+  .nav-item:nth-child(#{$x}) {
+    transition-delay: $x * 0.12s;
+  }
+}

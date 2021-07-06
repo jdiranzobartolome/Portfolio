@@ -1,0 +1,124 @@
+#awards-page {
+  margin-bottom: 0;
+  padding-top: 40px;
+  padding-bottom: 20px;
+
+  h1.lg-heading {
+    font-size: 4rem;
+  }
+
+  h2.sm-heading {
+    font-size: 1.5rem;
+    margin-bottom: 50px;
+  }
+
+  .awards-info {
+    width: 100%;
+    margin: auto;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-areas: "certificates awards";
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .certificates {
+    grid-area: certificates;
+    margin: auto;
+  }
+
+  .awards {
+    grid-area: awards;
+    margin: auto;
+  }
+
+  #slider {
+    width: 315px;
+    height: 508px; // 448px from the images and 70 px for the text and 30px extras for the margins and yellow lines.
+    position: relative;
+    //overflow: hidden;
+    float: left;
+    //padding: 3px;
+    //border: $secondary-color solid 2px;
+    //border-radius: 5px;
+  }
+
+  #slider img {
+    width: 315px;
+    height: 448px;
+  }
+
+  //We have to give position absolute so all the slide groups settle on top:0, left:0 of the slider
+  //IN other words. slider with relative and then slides with absolute so all of them can be exactly in the same place.
+  //If we put slides in relative, then they will be going down forming a column, following the natural flow.
+  .slide {
+    position: absolute;
+    //width: 315px;
+    //height: 518px;
+    height: 508px;
+    width: 315px;
+    //this is the default but for rememebering.
+    top: 0;
+    left: 0;
+    //border-bottom: solid 4px $secondary-color;
+  }
+
+  .slide-copy {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    padding: 5px;
+    text-align: center;
+    background: rgba(lighten($primary-color, 4), 0.5);
+    //background: 7f7f7f;
+    //background: rgba(0, 0, 0, 0.5);
+    border-top: solid 4px $secondary-color;
+
+    h2 {
+      font-size: 16px;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  span.prev,
+  span.next {
+    display: block;
+    float: left;
+    margin-top: 180px;
+    z-index: 100;
+    color: $secondary-color;
+    font-size: 60px;
+    position: relative;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 1;
+  }
+  span.prev {
+    margin-right: -3px;
+  }
+
+  span.next {
+    margin-left: -3px;
+  }
+
+  #prev,
+  #next {
+    display: none;
+    float: left;
+    margin-top: 462px;
+    cursor: pointer;
+    //position relative for using the margins just to move it around from its position without afecting anything.
+    position: relative;
+    z-index: 100;
+  }
+
+  #prev {
+    margin-right: -25px;
+  }
+
+  #next {
+    margin-left: -25px;
+  }
+}

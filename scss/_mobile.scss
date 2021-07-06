@@ -1,0 +1,465 @@
+//Note: Each media query styling needs to be nested in a similar way as in the main styling file. Otherwise they will not override the original ones.
+
+// Widescreens
+@include mediaXl {
+}
+
+// Desktops & Laptops
+@include mediaLg {
+  // related to awards.html
+  #awards-page {
+    .slide {
+      height: 440px;
+      width: 270px;
+    }
+
+    #slider img {
+      width: 270px;
+      height: 380px;
+    }
+
+    span.prev,
+    span.next {
+      font-size: 40px;
+    }
+
+    span.prev {
+      margin-right: -2px;
+    }
+
+    span.next {
+      margin-left: -45px;
+    }
+  }
+}
+
+// Tablets & Small Laptops
+@include mediaMd {
+  #work .projects {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  main {
+    align-items: center;
+    text-align: center;
+
+    &#home h1 {
+      margin-top: 8vh;
+    }
+  }
+
+  // related to about.html
+  .about-info {
+    display: grid;
+    grid-gap: 20px;
+    //grid-template-areas is used to define the grid areas as a visual representation
+    grid-template-areas: "bioimage" "bio" "job1" "job2" "job3";
+    grid-template-columns: 1fr;
+  }
+
+  #awards-page {
+    .awards-info {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    span.prev,
+    span.next {
+      font-size: 40px;
+    }
+
+    span.prev {
+      margin-right: -1px;
+    }
+
+    span.next {
+      margin-left: -1px;
+    }
+  }
+}
+
+// Smartphones
+@include mediaSm {
+  #work .projects {
+    grid-template-columns: 1fr;
+  }
+
+  //uso html como oldest ancestor to make this rules take precedence
+  html {
+    main {
+      align-items: center;
+      text-align: center;
+      &#home {
+        h1 {
+          margin-top: 3vh;
+          font-size: 2.8rem;
+          line-height: 3.25rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+          font-style: italic;
+          line-height: 2rem;
+        }
+      }
+
+      .letter-container {
+        margin-left: -0.8rem;
+
+        .accent {
+          //Intentar arreglar esto en el futuro. No se porque el @keyframes y
+          // y el font-size no funcionan.
+          //De momento lo dejo en no visible y yya
+          visibility: hidden;
+          top: -3rem;
+          left: 2.7rem;
+          transform: skew(-0.06turn, 40deg);
+          animation-play-state: paused;
+        }
+      }
+    }
+
+    //adding animation to background image
+    #bg-image {
+      animation: bg_image_animation 70s linear infinite;
+      -webkit-animation: bg_image_animation 70s linear infinite;
+      -moz-animation: bg_image_animation 70s linear infinite;
+    }
+
+    // Menu
+    .menu {
+      &-branding,
+      &-nav {
+        //Giving half a screen to each one of the menus
+        float: none;
+        width: 100%;
+      }
+
+      &-nav {
+        height: 70vh;
+        transform: translate3d(100%, -0, 0);
+        opacity: 0.975;
+
+        &.show {
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      .nav-item {
+        transform: translate3d(600px, 0, 0);
+
+        &.show {
+          transform: translate3d(0, 0, 0);
+        }
+
+        //In my phone in Mozilla, somehow the flex and justify-center
+        //did not seem to work... so I move all elements by hand aswell.
+        //I dont take the flex out so in browsers where it work it will go a little bit
+        // upper, but in general it willl look okay in all.
+        @for $i from 1 through 4 {
+          &:nth-child(#{$i}) {
+            transform: translate3d(0, -20px, 0);
+          }
+        }
+
+        .nav-link {
+          font-size: 1.5rem;
+        }
+      }
+
+      &-branding {
+        height: 30vh;
+        transform: translate3d(-100%, 0, 0);
+
+        &.show {
+          transform: translate3d(0, 0, 0);
+        }
+
+        .portrait {
+          width: 130px;
+          height: 130px;
+          background: url("../img/portrait_gray_small.jpg");
+          background-position: 20px -5px;
+          border-radius: 50%;
+          border: solid 2px $secondary-color;
+          z-index: 1;
+        }
+
+        &-overlay {
+          transform: translate3d(-100%, 0, 0);
+          opacity: 0.975;
+
+          &.show {
+            transform: translate3d(0, 0, 0);
+          }
+        }
+      }
+    }
+  }
+
+  #awards-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .awards-info {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #slider {
+      width: 240px;
+    }
+
+    .slide {
+      width: 240px;
+      height: 390px;
+    }
+
+    #slider img {
+      width: 240px;
+      height: 340px;
+    }
+
+    span.prev,
+    span.next {
+      font-size: 30px;
+    }
+
+    span.prev {
+      margin-right: -1px;
+    }
+
+    span.next {
+      margin-left: -1px;
+    }
+  }
+
+  // related to about.html
+  html#index {
+    //
+    //width: 1920px;
+  }
+
+  html#about {
+    & #home {
+      h1 {
+        margin-top: 4vh;
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  .about-info {
+    //grid-template-areas is used to define the grid areas as a visual representation
+    grid-template-areas: "bioimage" "bio" "job1" "job2" "job3";
+    grid-template-columns: 1fr;
+  }
+}
+
+// Smartphones
+@include mediaSSm {
+  #work .projects {
+    grid-template-columns: 1fr;
+  }
+
+  //uso html como oldest ancestor to make this rules take precedence
+  html {
+    main {
+      align-items: center;
+      text-align: center;
+      &#home {
+        h1 {
+          margin-top: 3vh;
+          font-size: 2.8rem;
+          line-height: 3.25rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+          font-style: italic;
+          line-height: 2rem;
+        }
+      }
+
+      .letter-container {
+        margin-left: -0.8rem;
+
+        .accent {
+          //Intentar arreglar esto en el futuro. No se porque el @keyframes y
+          // y el font-size no funcionan.
+          //De momento lo dejo en no visible y yya
+          visibility: hidden;
+          top: -3rem;
+          left: 2.7rem;
+          transform: skew(-0.06turn, 40deg);
+          animation-play-state: paused;
+        }
+      }
+    }
+
+    //adding animation to background image
+    #bg-image {
+      animation: bg_image_animation 70s linear infinite;
+      -webkit-animation: bg_image_animation 70s linear infinite;
+      -moz-animation: bg_image_animation 70s linear infinite;
+    }
+
+    // Menu
+    .menu {
+      &-branding,
+      &-nav {
+        //Giving half a screen to each one of the menus
+        float: none;
+        width: 100%;
+      }
+
+      &-nav {
+        height: 70vh;
+        transform: translate3d(100%, -0, 0);
+        opacity: 0.975;
+
+        &.show {
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      .nav-item {
+        transform: translate3d(600px, 0, 0);
+
+        &.show {
+          transform: translate3d(0, 0, 0);
+        }
+
+        //In my phone in Mozilla, somehow the flex and justify-center
+        //did not seem to work... so I move all elements by hand aswell.
+        //I dont take the flex out so in browsers where it work it will go a little bit
+        // upper, but in general it will look okay in all.
+        @for $i from 1 through 4 {
+          &:nth-child(#{$i}) {
+            transform: translate3d(0, -20px, 0);
+          }
+        }
+
+        .nav-link {
+          font-size: 1.5rem;
+        }
+      }
+
+      &-branding {
+        height: 30vh;
+        transform: translate3d(-100%, 0, 0);
+
+        &.show {
+          transform: translate3d(0, 0, 0);
+        }
+
+        .portrait {
+          width: 130px;
+          height: 130px;
+          background: url("../img/portrait_gray_small.jpg");
+          background-position: 20px -5px;
+          border-radius: 50%;
+          border: solid 2px $secondary-color;
+          z-index: 1;
+        }
+
+        &-overlay {
+          transform: translate3d(-100%, 0, 0);
+          opacity: 0.975;
+
+          &.show {
+            transform: translate3d(0, 0, 0);
+          }
+        }
+      }
+    }
+  }
+
+  #awards-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .awards-info {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #slider {
+      width: 200px;
+    }
+
+    .slide {
+      width: 200px;
+      height: 335px;
+    }
+
+    #slider img {
+      width: 200px;
+      height: 335px;
+    }
+
+    span.prev,
+    span.next {
+      font-size: 20px;
+    }
+
+    span.prev {
+      margin-right: -1px;
+    }
+
+    span.next {
+      margin-left: -1px;
+    }
+  }
+
+  //related to index.html
+  //NOTA!!! EMPEZASTE A HACERLO TODO JUNTO, LO DE ANTES QUE ES GENERAL DEBERIAS COMPROBARLO Y MEZCLARLO CON ESTOS SEPARADOS
+  // related to about.html
+  html#index {
+    //
+    //width: 1920px;
+  }
+
+  html#about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & #home {
+      h1 {
+        margin-top: 4vh;
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  .about-info {
+    //grid-template-areas is used to define the grid areas as a visual representation
+    grid-template-areas: "bioimage" "bio" "job1" "job2" "job3";
+    grid-template-columns: 1fr;
+  }
+}

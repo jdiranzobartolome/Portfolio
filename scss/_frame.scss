@@ -1,0 +1,11 @@
+//a frame in the style of a painting for images
+//cortesia de https://codepen.io/chris22smith/pen/PbBwjp
+
+.frame {
+  border-image: url("//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/frame.png")
+    45 45 45 45;
+  border-color: #f4be52;
+  border-style: solid;
+  border-width: 30px;
+  background-color: white;
+}
